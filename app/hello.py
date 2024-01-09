@@ -1,13 +1,18 @@
 import configparser
 from flask import Flask
+from pathlib import Path
+import os
 
 config = configparser.RawConfigParser()
-config.read('config.properties')
+path = Path(__file__)
+ROOT_DIR = path.parent.absolute()
+config_path = os.path.join(ROOT_DIR, "config.properties")
+config.read(config_path)
 
 app = Flask(__name__)
 
 if config.getboolean("features", "feature_1") == True:
-	message = "Hello, Sasha!"
+	message = "Hello, Olexii!"
 else:
 	message = "Hello, World!"
 
