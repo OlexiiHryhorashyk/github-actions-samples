@@ -14,7 +14,7 @@ app = Flask(__name__)
 if config.getboolean("features", "feature_1") == True:
 	message = "Hello, Olexii!"
 else:
-	message = "Hello, World!"
+	message = "Hello, Worldd!"
 
 @app.route("/")
 def hello():
