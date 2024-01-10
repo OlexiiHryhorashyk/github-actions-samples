@@ -104,6 +104,7 @@ jobs:
 
     - name: Get the GKE credentials so we can deploy to the cluster
       run: |
+        gcloud components install gke-gcloud-auth-plugin
         gcloud container clusters get-credentials "$GKE_CLUSTER" --region "$GKE_REGION"
         kubectl version --client
     - name: Create namespace & set in Kustomize
