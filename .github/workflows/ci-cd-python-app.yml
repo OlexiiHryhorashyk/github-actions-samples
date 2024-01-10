@@ -158,9 +158,9 @@ jobs:
  
     - name: Commit files
       run: |
+        pit pull
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        pit pull
         git commit -am "Bump docker tag"
         
     - name: Push changes
