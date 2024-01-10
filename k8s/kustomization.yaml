@@ -8,4 +8,4 @@ namespace: hello-gitops
 images:
 - name: hello-gitops
   newName: palantin/hello-gitops
-  newTag: 7143635e87e9030e216e1c84c15ffdf376ca622c
+  newTag: efae2223a0a2ac297343032259532ba2075a8b93
