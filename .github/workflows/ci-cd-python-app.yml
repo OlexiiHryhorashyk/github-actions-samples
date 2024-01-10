@@ -134,6 +134,7 @@ jobs:
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
+       git pull
        cd k8s
        kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
        cat kustomization.yaml
@@ -158,7 +159,6 @@ jobs:
  
     - name: Commit files
       run: |
-        git pull
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -am "Bump docker tag"
