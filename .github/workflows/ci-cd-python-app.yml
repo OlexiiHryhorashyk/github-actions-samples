@@ -107,6 +107,7 @@ jobs:
         gcloud components install gke-gcloud-auth-plugin
         gcloud container clusters get-credentials "$GKE_CLUSTER" --region "$GKE_REGION"
         kubectl version --client
+
     - name: Create namespace & set in Kustomize
       run: |
          namespacePresentBlue=`kubectl get ns | grep python-app-blue | wc -l`
@@ -134,7 +135,6 @@ jobs:
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
-       git pull
        cd k8s
        kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
        cat kustomization.yaml
@@ -142,11 +142,6 @@ jobs:
     - name: Deploy updated Kubernetes resources
       run: |
         kubectl apply -k k8s/ 
-   
-    # DO SOME CHECKS HERE BEFORE COMMIT
-    #- name: Deploy updated Kubernetes resources
-    #  run: |
-    #    kubectl apply -k k8s/
 
     # REMOVE OLD DEPLOYMENT!!
     - name: Remove old namespace
@@ -162,6 +157,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -am "Bump docker tag"
+        git pull
         
     - name: Push changes
       uses: ad-m/github-push-action@master
