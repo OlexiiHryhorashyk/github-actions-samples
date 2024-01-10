@@ -101,6 +101,7 @@ jobs:
 
     - name: Get the GKE credentials so we can deploy to the cluster
       run: |
+        gcloud auth activate-service-account --key-file=${{ secrets.GCP_CREDENTIALS }}
         gcloud container clusters get-credentials "$GKE_CLUSTER" --region "$GKE_REGION" --project ${{ secrets.GKE_PROJECT }}
         kubectl version --client
     - name: Create namespace & set in Kustomize
